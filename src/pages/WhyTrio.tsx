@@ -11,8 +11,8 @@ export default function WhyTrio() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-lg font-bold text-gray-800">Why Use the Trio Approach?</h2>
-        <p className="text-sm text-gray-500">Clinical rationale for trio WGS in paediatric developmental disorders</p>
+        <h2 className="text-xl font-bold text-gray-800">Why Use the Trio Approach?</h2>
+        <p className="text-base text-gray-500">Clinical rationale for trio WGS in paediatric developmental disorders</p>
       </div>
 
       {/* Key stats */}
@@ -49,7 +49,7 @@ export default function WhyTrio() {
           <p className="text-teal-800 font-bold text-sm">2,892+ genes · 13 sub-panels</p>
           <p className="text-teal-700 text-sm">Covers most syndromic genetic conditions</p>
         </div>
-        <p className="text-sm text-gray-600 mb-3">Sub-panels included in R27:</p>
+        <p className="text-base text-gray-600 mb-3">Sub-panels included in R27:</p>
         <div className="grid grid-cols-2 gap-2">
           {[
             { code: 'R29', name: 'Intellectual disability' },
@@ -72,12 +72,12 @@ export default function WhyTrio() {
         <div className="space-y-3">
           <div className="border-l-4 border-teal-400 pl-3">
             <p className="text-xs font-semibold text-teal-600 uppercase">Example 1 — Array CGH first</p>
-            <p className="text-sm text-gray-700 mt-1">10-year-old girl, mild ID, cleft palate, neonatal hypocalcaemia. Clinician suspects <strong>22q11 deletion</strong>. → Array CGH first (faster). R27 trio if normal.</p>
+            <p className="text-base text-gray-700 mt-1">10-year-old girl, mild ID, cleft palate, neonatal hypocalcaemia. Clinician suspects <strong>22q11 deletion</strong>. → Array CGH first (faster). R27 trio if normal.</p>
             <p className="text-xs text-gray-500 mt-1">Same approach for Down's, Turner's, Williams, Cri du Chat</p>
           </div>
           <div className="border-l-4 border-blue-400 pl-3">
             <p className="text-xs font-semibold text-blue-600 uppercase">Example 2 — Straight to WGS</p>
-            <p className="text-sm text-gray-700 mt-1">4-year-old boy, severe DD, dysmorphism. No recognised diagnosis. → <strong>R27 WGS trio</strong> directly. No need for array CGH or FraX first.</p>
+            <p className="text-base text-gray-700 mt-1">4-year-old boy, severe DD, dysmorphism. No recognised diagnosis. → <strong>R27 WGS trio</strong> directly. No need for array CGH or FraX first.</p>
           </div>
         </div>
       </div>

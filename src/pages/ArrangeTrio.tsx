@@ -59,8 +59,8 @@ export default function ArrangeTrio() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-lg font-bold text-gray-800">Arrange Trio WGS</h2>
-        <p className="text-sm text-gray-500">Step-by-step checklist — Northern Genetics Service</p>
+        <h2 className="text-xl font-bold text-gray-800">Arrange Trio WGS</h2>
+        <p className="text-base text-gray-500">Step-by-step checklist — Northern Genetics Service</p>
       </div>
 
       {/* Progress */}
@@ -99,7 +99,7 @@ export default function ArrangeTrio() {
                   <p className={`font-semibold text-sm ${done ? 'text-teal-700 line-through' : 'text-gray-800'}`}>
                     {item.title}
                   </p>
-                  <p className="text-sm text-gray-500 mt-1 leading-relaxed">{item.detail}</p>
+                  <p className="text-base text-gray-500 mt-1 leading-relaxed">{item.detail}</p>
                   {item.hasQR && (
                     <div className="mt-2 bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 inline-flex items-center gap-2">
                       <span className="text-blue-700 text-sm">📱 {item.qrNote}</span>

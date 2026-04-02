@@ -56,7 +56,7 @@ function Btn({ children, onClick, colour = 'blue' }: { children: React.ReactNode
   return (
     <button
       onClick={onClick}
-      className={`w-full py-3 px-4 rounded-xl font-semibold text-sm transition-all ${cls}`}
+      className={`w-full py-3 px-4 rounded-xl font-semibold text-base transition-all ${cls}`}
     >
       {children}
     </button>
@@ -84,14 +84,14 @@ function ResultBox({ title, code, rationale, actions, urgent }: {
       </Card>
       <Card>
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Why this test</p>
-        <p className="text-gray-700 text-sm leading-relaxed">{rationale}</p>
+        <p className="text-gray-700 text-base leading-relaxed">{rationale}</p>
       </Card>
       {actions && actions.length > 0 && (
         <Card>
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Next steps</p>
           <ul className="space-y-2">
             {actions.map((a, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+              <li key={i} className="flex items-start gap-2 text-base text-gray-700">
                 <span className="text-teal-500 font-bold mt-0.5">→</span>
                 {a}
               </li>
@@ -135,8 +135,8 @@ export default function TestSelector() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-lg font-bold text-gray-800">Test Selector</h2>
-        <p className="text-sm text-gray-500">North Tees community paediatrics genetic testing pathway — April 2026</p>
+        <h2 className="text-xl font-bold text-gray-800">Test Selector</h2>
+        <p className="text-base text-gray-500">North Tees community paediatrics genetic testing pathway — April 2026</p>
       </div>
 
       {/* Urgent flags — always visible */}
@@ -147,12 +147,12 @@ export default function TestSelector() {
             <label className="flex items-center gap-3 cursor-pointer">
               <input type="checkbox" checked={pregnant} onChange={e => setPregnant(e.target.checked)}
                 className="w-4 h-4 accent-red-600" />
-              <span className="text-sm text-gray-700">Mother of patient is pregnant</span>
+              <span className="text-base text-gray-700">Mother of patient is pregnant</span>
             </label>
             <label className="flex items-center gap-3 cursor-pointer">
               <input type="checkbox" checked={urgent} onChange={e => setUrgent(e.target.checked)}
                 className="w-4 h-4 accent-red-600" />
-              <span className="text-sm text-gray-700">Urgent management implications</span>
+              <span className="text-base text-gray-700">Urgent management implications</span>
             </label>
           </div>
           {(pregnant || urgent) && (
@@ -166,7 +166,7 @@ export default function TestSelector() {
       {/* Step: Start */}
       {step === 'start' && (
         <Card>
-          <p className="text-sm font-semibold text-gray-700 mb-4">
+          <p className="text-base font-semibold text-gray-700 mb-4">
             Does the patient have at least <strong>moderate intellectual disability</strong> or at least <strong>moderate global developmental delay</strong>?
           </p>
           <div className="space-y-2">
@@ -179,7 +179,7 @@ export default function TestSelector() {
       {/* Step: Recognisable chromosomal condition */}
       {step === 'recognisable' && (
         <Card>
-          <p className="text-sm font-semibold text-gray-700 mb-1">
+          <p className="text-base font-semibold text-gray-700 mb-1">
             Does the clinical picture suggest a <strong>recognisable chromosomal condition</strong>?
           </p>
           <p className="text-xs text-gray-400 mb-3">Tick any that apply</p>
@@ -188,7 +188,7 @@ export default function TestSelector() {
               <label key={r} className="flex items-center gap-3 cursor-pointer">
                 <input type="checkbox" checked={recognisableSelected.includes(r)}
                   onChange={() => toggleRec(r)} className="w-4 h-4 accent-blue-700" />
-                <span className="text-sm text-gray-700">{r}</span>
+                <span className="text-base text-gray-700">{r}</span>
               </label>
             ))}
           </div>
@@ -206,7 +206,7 @@ export default function TestSelector() {
       {/* Step: Box A syndromic features */}
       {step === 'boxA' && (
         <Card>
-          <p className="text-sm font-semibold text-gray-700 mb-1">
+          <p className="text-base font-semibold text-gray-700 mb-1">
             Does the patient have any <strong>syndromic features</strong>? (Box A)
           </p>
           <p className="text-xs text-gray-400 mb-3">Tick all that apply</p>
@@ -215,7 +215,7 @@ export default function TestSelector() {
               <label key={item} className="flex items-start gap-3 cursor-pointer">
                 <input type="checkbox" checked={boxASelected.includes(item)}
                   onChange={() => toggleBoxA(item)} className="w-4 h-4 mt-0.5 accent-blue-700" />
-                <span className="text-sm text-gray-700">{item}</span>
+                <span className="text-base text-gray-700">{item}</span>
               </label>
             ))}
           </div>
@@ -229,7 +229,7 @@ export default function TestSelector() {
       {/* Step: Additional branching */}
       {step === 'additional' && (
         <Card>
-          <p className="text-sm font-semibold text-gray-700 mb-4">
+          <p className="text-base font-semibold text-gray-700 mb-4">
             Which best describes the patient?
           </p>
           <div className="space-y-2">
@@ -323,7 +323,7 @@ export default function TestSelector() {
         <Card>
           <p className="text-2xl mb-2">⚠️</p>
           <p className="font-semibold text-gray-800 mb-1">Outside this pathway</p>
-          <p className="text-sm text-gray-600">This pathway is for patients with at least moderate ID or GDD. Consider single gene / small panel tests with quick turnaround if a specific diagnosis is suspected, or contact Northern Genetics for advice.</p>
+          <p className="text-base text-gray-600">This pathway is for patients with at least moderate ID or GDD. Consider single gene / small panel tests with quick turnaround if a specific diagnosis is suspected, or contact Northern Genetics for advice.</p>
         </Card>
       )}
 
@@ -337,7 +337,7 @@ export default function TestSelector() {
             {QUICK_SINGLES.map(q => (
               <div key={q.code} className="flex items-center gap-3">
                 <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-lg min-w-10 text-center">{q.code}</span>
-                <span className="text-sm text-gray-700">{q.name}</span>
+                <span className="text-base text-gray-700">{q.name}</span>
               </div>
             ))}
           </div>

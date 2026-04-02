@@ -75,8 +75,8 @@ export default function ManageResults() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-lg font-bold text-gray-800">Managing WGS Results</h2>
-        <p className="text-sm text-gray-500">Select the result type to see what action to take</p>
+        <h2 className="text-xl font-bold text-gray-800">Managing WGS Results</h2>
+        <p className="text-base text-gray-500">Select the result type to see what action to take</p>
       </div>
 
       {/* Result selector */}
@@ -109,7 +109,7 @@ export default function ManageResults() {
                     {r.actions.map((a, i) => (
                       <div key={i} className="flex items-start gap-2">
                         <span className="text-blue-500 font-bold text-sm mt-0.5 flex-shrink-0">→</span>
-                        <p className="text-sm text-gray-700">{a}</p>
+                        <p className="text-base text-gray-700">{a}</p>
                       </div>
                     ))}
                   </div>
@@ -135,7 +135,7 @@ export default function ManageResults() {
       {/* Contact genetics */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
         <h3 className="font-semibold text-gray-800 mb-3">⚠️ Complex result sharing</h3>
-        <p className="text-sm text-gray-600 mb-3">
+        <p className="text-base text-gray-600 mb-3">
           Result sharing can be complex — particularly for unexpected or uncertain variants. Do not share results with patients without genetics input where there is uncertainty.
         </p>
         <a

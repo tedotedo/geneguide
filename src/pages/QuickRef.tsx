@@ -25,8 +25,8 @@ export default function QuickRef() {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-lg font-bold text-gray-800">Quick Reference</h2>
-        <p className="text-sm text-gray-500">R-codes, contacts, and urgent flags</p>
+        <h2 className="text-xl font-bold text-gray-800">Quick Reference</h2>
+        <p className="text-base text-gray-500">R-codes, contacts, and urgent flags</p>
       </div>
 
       {/* Urgent */}
@@ -36,7 +36,7 @@ export default function QuickRef() {
           {URGENT_FLAGS.map(u => (
             <div key={u.flag}>
               <p className="text-sm font-semibold text-red-800">{u.flag}</p>
-              <p className="text-sm text-red-700 mt-0.5">{u.action}</p>
+              <p className="text-base text-red-700 mt-0.5">{u.action}</p>
             </div>
           ))}
         </div>
@@ -50,7 +50,7 @@ export default function QuickRef() {
             <div key={r.code} className="border-b border-gray-100 last:border-0 pb-3 last:pb-0">
               <div className="flex items-center gap-2 mb-1">
                 <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-lg">{r.code}</span>
-                <span className="text-sm font-semibold text-gray-800">{r.name}</span>
+                <span className="text-base font-semibold text-gray-800">{r.name}</span>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed">{r.desc}</p>
             </div>
@@ -64,7 +64,7 @@ export default function QuickRef() {
         <div className="space-y-3">
           {CONTACTS.map(c => (
             <div key={c.label}>
-              <p className="text-sm font-semibold text-gray-800">{c.label}</p>
+              <p className="text-base font-semibold text-gray-800">{c.label}</p>
               <p className="text-xs text-gray-500 mb-1">{c.note}</p>
               <a href={`mailto:${c.email}`}
                 className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-blue-100"
@@ -91,7 +91,7 @@ export default function QuickRef() {
           ].map((rule, i) => (
             <div key={i} className="flex items-start gap-2">
               <span className="text-blue-500 font-bold text-sm flex-shrink-0 mt-0.5">•</span>
-              <p className="text-sm text-gray-700">{rule}</p>
+              <p className="text-base text-gray-700">{rule}</p>
             </div>
           ))}
         </div>

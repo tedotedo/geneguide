@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+html {
+  font-size: 16px;
+}
+
+body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Prevent scroll jump on nav */
+html {
+  scroll-behavior: auto;
+}
