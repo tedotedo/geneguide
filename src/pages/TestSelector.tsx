@@ -116,6 +116,61 @@ const QUICK_SINGLES = [
   { code: '—', name: 'Imprinting disorders' },
 ]
 
+const QUICK_SINGLES_INFO: Record<string, SyndromeInfo> = {
+  'Spinal muscular atrophy type 1': {
+    name: 'Spinal muscular atrophy type 1 (R70)',
+    features: [
+      'Onset before 6 months, never achieves sitting',
+      'Profound hypotonia — "floppy infant"',
+      'Paradoxical breathing (chest sucks in on inspiration)',
+      'Tongue fasciculations',
+      'Alert, bright expression (cognition preserved)',
+      'Areflexia',
+    ],
+    genetics: 'Autosomal recessive. Homozygous deletion of SMN1 exon 7 in ~95%. SMN2 copy number modifies severity.',
+    test: 'R70 — SMN1 deletion analysis (MLPA). Fast turnaround. Do not wait for WGS — treatment window is narrow. Nusinersen/onasemnogene available on NHS.',
+  },
+  'Myotonic dystrophy': {
+    name: 'Myotonic dystrophy (R72)',
+    features: [
+      'Congenital form: severe hypotonia, respiratory failure at birth, talipes',
+      'Facial diplegia, tented upper lip',
+      'Mother almost always affected (often mildly)',
+      'Childhood form: learning difficulties, myotonia, facial weakness',
+      'Ptosis, distal muscle weakness',
+      'Cardiac conduction defects (older patients)',
+    ],
+    genetics: 'Autosomal dominant. CTG trinucleotide repeat expansion in DMPK gene (chromosome 19q). Anticipation — expands with maternal transmission.',
+    test: 'R72 — DMPK repeat expansion analysis. Examine and test mother if congenital form suspected.',
+  },
+  'Prader-Willi syndrome': {
+    name: 'Prader-Willi syndrome (R48)',
+    features: [
+      'Neonatal hypotonia, poor feeding, FTT',
+      'Hyperphagia and obesity from ~2 years',
+      'Hypogonadism, cryptorchidism',
+      'Short stature',
+      'Mild–moderate intellectual disability',
+      'Behavioural problems — rigidity, skin-picking, temper tantrums',
+    ],
+    genetics: 'Paternal 15q11-q13 deletion (70%), maternal uniparental disomy (25%), or imprinting defect (5%). Imprinting centre controls expression.',
+    test: 'R48 — methylation-specific MLPA detects all three mechanisms. Do not rely on microarray alone (misses UPD and imprinting defects).',
+  },
+  'Imprinting disorders': {
+    name: 'Imprinting disorders',
+    features: [
+      'Angelman syndrome: severe ID, absent speech, seizures, happy affect, ataxia',
+      'Beckwith-Wiedemann: macrosomia, macroglossia, omphalocele, hypoglycaemia, tumour risk',
+      'Silver-Russell: severe growth restriction, relative macrocephaly, body asymmetry',
+      'Temple syndrome: hypotonia, developmental delay, early puberty, obesity',
+      'Consider when features do not fit a standard pattern',
+    ],
+    genetics: 'Caused by abnormal imprinting at various loci. Mechanisms include deletion, UPD, and imprinting centre defects. Standard microarray may miss UPD and methylation errors.',
+    test: 'Methylation-specific tests required (not standard microarray). Discuss with Northern Genetics to select the correct panel for the suspected syndrome.',
+  },
+}
+
+
 function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={`bg-white rounded-2xl border border-gray-200 shadow-sm p-5 ${className}`}>
@@ -260,9 +315,12 @@ export default function TestSelector() {
   return (
     <div className="space-y-4">
       {/* Syndrome info modal */}
-      {activeModal && SYNDROME_INFO[activeModal] && (
-        <SyndromeModal info={SYNDROME_INFO[activeModal]} onClose={() => setActiveModal(null)} />
-      )}
+      {activeModal && (() => {
+        const info = activeModal.startsWith('qs:')
+          ? QUICK_SINGLES_INFO[activeModal.slice(3)]
+          : SYNDROME_INFO[activeModal]
+        return info ? <SyndromeModal info={info} onClose={() => setActiveModal(null)} /> : null
+      })()}
 
       <div>
         <h2 className="text-xl font-bold text-gray-800">Test Selector</h2>
@@ -476,9 +534,18 @@ export default function TestSelector() {
           </p>
           <div className="space-y-2">
             {QUICK_SINGLES.map(q => (
-              <div key={q.code} className="flex items-center gap-3">
-                <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-lg min-w-10 text-center">{q.code}</span>
-                <span className="text-base text-gray-700">{q.name}</span>
+              <div key={q.code} className="flex items-center gap-2">
+                <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-lg min-w-10 text-center shrink-0">{q.code}</span>
+                <span className="text-base text-gray-700 flex-1">{q.name}</span>
+                {QUICK_SINGLES_INFO[q.name] && (
+                  <button
+                    onClick={() => setActiveModal('qs:' + q.name)}
+                    className="shrink-0 w-7 h-7 rounded-full bg-blue-100 text-blue-700 text-sm font-bold hover:bg-blue-200 transition-colors flex items-center justify-center"
+                    aria-label={`Info about ${q.name}`}
+                  >
+                    ⓘ
+                  </button>
+                )}
               </div>
             ))}
           </div>
