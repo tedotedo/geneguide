@@ -173,6 +173,13 @@ const QUICK_SINGLES_INFO: Record<string, SyndromeInfo> = {
 }
 
 
+const FORM_LINKS = [
+  { label: 'GMS Test Order Form — Rare Disease (v1.5)', url: 'https://www.england.nhs.uk/wp-content/uploads/2024/07/gms-test-order-form-rare-disease-v1.5.pdf', note: 'National WGS request form' },
+  { label: 'NEY GLH Rare Disease Request Form (v4.2)', url: 'https://ney-genomics.org.uk/wp-content/uploads/2026/03/FORM-411.027-NEYGLH-Rare-Disease-Request-Form-v4.2.docx', note: 'Local NEY GLH form — also required' },
+  { label: 'Record of Discussion Form (v4.03)', url: 'https://www.england.nhs.uk/wp-content/uploads/2021/09/nhs-genomic-medicine-service-record-of-discussion-form.pdf', note: 'Consent form — one per person (×3)' },
+  { label: 'Young Persons Assent Form (v3.02)', url: 'https://www.england.nhs.uk/wp-content/uploads/2021/09/nhs-genomic-medicine-service-young-persons-assent-form.pdf', note: 'For children aged ~7–16' },
+]
+
 function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={`bg-white rounded-2xl border border-gray-200 shadow-sm p-5 ${className}`}>
@@ -257,11 +264,12 @@ function SyndromeModal({ info, onClose }: { info: SyndromeInfo; onClose: () => v
   )
 }
 
-function ResultBox({ title, code, rationale, actions, urgent }: {
+function ResultBox({ title, code, rationale, actions, formLinks, urgent }: {
   title: string
   code: string
   rationale: string
   actions?: string[]
+  formLinks?: { label: string; url: string; note?: string }[]
   urgent?: string
 }) {
   return (
@@ -291,6 +299,28 @@ function ResultBox({ title, code, rationale, actions, urgent }: {
               </li>
             ))}
           </ul>
+        </Card>
+      )}
+      {formLinks && formLinks.length > 0 && (
+        <Card>
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Forms & documents</p>
+          <div className="space-y-2">
+            {formLinks.map(link => (
+              <a
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2 hover:bg-blue-100 transition-colors"
+              >
+                <span className="text-blue-500 mt-0.5 shrink-0">📄</span>
+                <div>
+                  <p className="text-blue-700 text-sm font-semibold leading-snug">{link.label}</p>
+                  {link.note && <p className="text-blue-400 text-xs mt-0.5">{link.note}</p>}
+                </div>
+              </a>
+            ))}
+          </div>
         </Card>
       )}
     </div>
@@ -487,6 +517,7 @@ export default function TestSelector() {
             'Complete WGS request form + Record of Discussion forms',
             'Email forms to nuth.dna@nhs.net',
           ]}
+          formLinks={FORM_LINKS}
           urgent={urgentFlag}
         />
       )}
@@ -530,6 +561,7 @@ export default function TestSelector() {
             'Complete WGS request form + Record of Discussion forms',
             'Email forms to nuth.dna@nhs.net',
           ]}
+          formLinks={FORM_LINKS}
           urgent={urgentFlag}
         />
       )}
