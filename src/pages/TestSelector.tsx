@@ -27,6 +27,7 @@ type SyndromeInfo = {
   features: string[]
   genetics: string
   test: string
+  link?: { label: string; url: string }
 }
 
 const SYNDROME_INFO: Record<string, SyndromeInfo> = {
@@ -42,6 +43,7 @@ const SYNDROME_INFO: Record<string, SyndromeInfo> = {
     ],
     genetics: "Trisomy 21 in 95% of cases. Translocation (4%) or mosaic (1%) forms also occur.",
     test: "Chromosomal microarray (R28/R137) — karyotype if translocation suspected",
+    link: { label: "DS health surveillance pathway", url: "https://dspathway.app" },
   },
   "Turner's syndrome": {
     name: "Turner syndrome (45,X)",
@@ -227,6 +229,20 @@ function SyndromeModal({ info, onClose }: { info: SyndromeInfo; onClose: () => v
             <p className="text-xs font-semibold text-blue-500 uppercase tracking-wide mb-1">Recommended test</p>
             <p className="text-sm text-blue-800 font-medium">{info.test}</p>
           </div>
+          {info.link && (
+            <a
+              href={info.link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-teal-50 border border-teal-200 rounded-xl p-3 text-teal-700 hover:bg-teal-100 transition-colors"
+            >
+              <span className="text-lg">🔗</span>
+              <div>
+                <p className="text-xs font-semibold text-teal-500 uppercase tracking-wide">Related resource</p>
+                <p className="text-sm font-medium">{info.link.label}</p>
+              </div>
+            </a>
+          )}
         </div>
         <div className="px-5 pb-5">
           <button
