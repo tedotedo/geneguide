@@ -6,6 +6,7 @@ function ScrollToTop() {
   useEffect(() => { window.scrollTo(0, 0) }, [pathname])
   return null
 }
+import Welcome from './pages/Welcome'
 import TestSelector from './pages/TestSelector'
 import WhyTrio from './pages/WhyTrio'
 import ArrangeTrio from './pages/ArrangeTrio'
@@ -13,7 +14,7 @@ import ManageResults from './pages/ManageResults'
 import QuickRef from './pages/QuickRef'
 
 const nav = [
-  { to: '/', label: '🧬 Test Selector' },
+  { to: '/selector', label: '🧬 Test Selector' },
   { to: '/why-trio', label: '❓ Why Trio?' },
   { to: '/arrange', label: '📋 Arrange Trio' },
   { to: '/results', label: '📊 Results' },
@@ -49,29 +50,38 @@ function BottomNav() {
   )
 }
 
-export default function App() {
+function AppShell() {
+  const { pathname } = useLocation()
+  const isWelcome = pathname === '/'
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <header className="bg-blue-700 text-white px-4 py-3 shadow-md">
-        <div className="max-w-2xl mx-auto flex items-center gap-3">
-          <span className="text-2xl">🧬</span>
-          <div>
-            <h1 className="font-bold text-lg leading-tight">GeneGuide</h1>
-            <p className="text-blue-200 text-sm">Paediatric Genetic Testing — North Tees</p>
+      {!isWelcome && (
+        <header className="bg-blue-700 text-white px-4 py-3 shadow-md">
+          <div className="max-w-2xl mx-auto flex items-center gap-3">
+            <span className="text-2xl">🧬</span>
+            <div>
+              <h1 className="font-bold text-lg leading-tight">GeneGuide</h1>
+              <p className="text-blue-200 text-sm">Paediatric Genetic Testing — North Tees</p>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
       <ScrollToTop />
-      <main className="max-w-2xl mx-auto px-4 py-6 pb-28">
+      <main className={`max-w-2xl mx-auto px-4 py-6 ${!isWelcome ? 'pb-28' : ''}`}>
         <Routes>
-          <Route path="/" element={<TestSelector />} />
+          <Route path="/" element={<Welcome />} />
+          <Route path="/selector" element={<TestSelector />} />
           <Route path="/why-trio" element={<WhyTrio />} />
           <Route path="/arrange" element={<ArrangeTrio />} />
           <Route path="/results" element={<ManageResults />} />
           <Route path="/ref" element={<QuickRef />} />
         </Routes>
       </main>
-      <BottomNav />
+      {!isWelcome && <BottomNav />}
     </div>
   )
+}
+
+export default function App() {
+  return <AppShell />
 }
