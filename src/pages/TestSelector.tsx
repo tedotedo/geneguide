@@ -112,10 +112,10 @@ const SYNDROME_INFO: Record<string, SyndromeInfo> = {
 const RECOGNISABLE = Object.keys(SYNDROME_INFO)
 
 const QUICK_SINGLES = [
-  { code: 'R70', name: 'Spinal muscular atrophy type 1' },
-  { code: 'R72', name: 'Myotonic dystrophy' },
-  { code: 'R48', name: 'Prader-Willi syndrome' },
-  { code: '—', name: 'Imprinting disorders' },
+  { code: 'R70', name: 'Spinal muscular atrophy type 1', paeds: true },
+  { code: 'R72', name: 'Myotonic dystrophy', paeds: false, specialist: 'Clinical Genetics or Neurology' },
+  { code: 'R48', name: 'Prader-Willi syndrome', paeds: true },
+  { code: '—', name: 'Imprinting disorders', paeds: true },
 ]
 
 const QUICK_SINGLES_INFO: Record<string, SyndromeInfo> = {
@@ -554,7 +554,7 @@ export default function TestSelector() {
         <ResultBox
           title="WGS trio — Paeds-led"
           code="R27"
-          rationale="No additional syndromic features. Paeds-led R27 is appropriate. R27 is a super panel covering 2,892+ genes across 13 sub-panels including ID (R29), inborn errors of metabolism (R98), skeletal dysplasia (R104) and more. Suitable for most paediatric patients with a possible syndromic genetic diagnosis."
+          rationale="No additional syndromic features. Paeds-led R27 is appropriate. R27 is a super panel covering 2,892+ genes across 13 sub-panels including ID (R29), inborn errors of metabolism (R98), skeletal dysplasia (R104) and more. Suitable for most paediatric patients with a possible syndromic genetic diagnosis. Note: R98 and R104 are included within R27 but cannot be requested as standalone tests by community paediatricians — those require Metabolic Medicine or Clinical Genetics."
           actions={[
             'Request R27 paeds-led trio',
             'Arrange trio — proband + both parents',
@@ -582,17 +582,22 @@ export default function TestSelector() {
           </p>
           <div className="space-y-2">
             {QUICK_SINGLES.map(q => (
-              <div key={q.code} className="flex items-center gap-2">
-                <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-lg min-w-10 text-center shrink-0">{q.code}</span>
-                <span className="text-base text-gray-700 flex-1">{q.name}</span>
-                {QUICK_SINGLES_INFO[q.name] && (
-                  <button
-                    onClick={() => setActiveModal('qs:' + q.name)}
-                    className="shrink-0 w-7 h-7 rounded-full bg-blue-100 text-blue-700 text-sm font-bold hover:bg-blue-200 transition-colors flex items-center justify-center"
-                    aria-label={`Info about ${q.name}`}
-                  >
-                    ⓘ
-                  </button>
+              <div key={q.code} className="flex flex-col gap-1">
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-lg min-w-10 text-center shrink-0 ${q.paeds === false ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'}`}>{q.code}</span>
+                  <span className="text-base text-gray-700 flex-1">{q.name}</span>
+                  {QUICK_SINGLES_INFO[q.name] && (
+                    <button
+                      onClick={() => setActiveModal('qs:' + q.name)}
+                      className="shrink-0 w-7 h-7 rounded-full bg-blue-100 text-blue-700 text-sm font-bold hover:bg-blue-200 transition-colors flex items-center justify-center"
+                      aria-label={`Info about ${q.name}`}
+                    >
+                      ⓘ
+                    </button>
+                  )}
+                </div>
+                {q.paeds === false && q.specialist && (
+                  <p className="text-xs text-amber-700 ml-12">⚠️ Refer to {q.specialist} — cannot be requested by community paediatrics</p>
                 )}
               </div>
             ))}

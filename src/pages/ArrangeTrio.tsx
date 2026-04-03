@@ -24,12 +24,16 @@ const CHECKLIST: CheckItem[] = [
     title: 'Confirm eligibility',
     detail: 'Check the patient meets WGS rare disease eligibility criteria before proceeding. Key indications relevant to community paediatrics:',
     bullets: [
-      'R27 — Congenital malformation and dysmorphism syndromes',
-      'R29 — Intellectual disability',
-      'R59 — Early onset or syndromic epilepsy',
-      'R98 — Likely inborn error of metabolism',
-      'R104 — Skeletal dysplasia',
-      'R193 — Hypotonic infant with likely central cause',
+      'R27 — Paediatric disorders (congenital malformation, dysmorphism, ID, GDD) ✅ Community paeds',
+      'R28/R137 — Chromosomal microarray (recognisable chromosomal syndromes) ✅ Community paeds',
+      'R29 — Intellectual disability WGS ✅ Community paeds',
+      'R48 — Prader-Willi syndrome ✅ Community paeds',
+      'R69 — Hypotonic infant with likely central cause ✅ Community paeds',
+      'R70 — SMA type 1 ✅ Community paeds',
+      'R59 — Early onset/syndromic epilepsy ⚠️ Neurology/Clinical Genetics/Metabolic Medicine only',
+      'R72 — Myotonic dystrophy ⚠️ Clinical Genetics or Neurology only',
+      'R98 — Inborn errors of metabolism ⚠️ Metabolic Medicine/Clinical Genetics only',
+      'R104 — Skeletal dysplasia ⚠️ Clinical Genetics only (requires specialist review first)',
     ],
     links: [
       {
