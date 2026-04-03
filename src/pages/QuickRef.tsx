@@ -9,19 +9,19 @@ type RCode = {
 const RCODES: RCode[] = [
   {
     code: 'R27', name: 'Paediatric WGS super panel',
-    desc: 'Super panel covering 2,892+ genes, 13 sub-panels including ID (R29), epilepsy (R59), IEM (R98), skeletal dysplasia (R104). First-line WGS for most paediatric patients with possible syndromic genetic diagnosis.',
+    desc: 'Default first-line WGS test for most paediatric patients as of June 2025. Super panel covering 13 sub-panels including ID (R29), epilepsy (R59), IEM (R98), skeletal dysplasia (R104). WGS detects CNVs — no separate microarray needed.',
     who: 'Clinical Genetics · Metabolic Medicine · Paediatric Neurology · Paediatrics · Community Paediatrics',
     paeds: true,
   },
   {
     code: 'R28', name: 'Chromosomal microarray (SNP array)',
-    desc: 'First-line when a recognisable chromosomal syndrome is suspected (Down\'s, Williams, 22q11, Cri du Chat etc.). Faster results than WGS for chromosomal causes.',
+    desc: 'Retained where there is strong clinical suspicion of a specific chromosomal cause (Williams, 22q11, Cri du Chat) for faster results. No longer routine first-line for most indications as of June 2025 — WGS (R27) is now preferred. Not the primary test for Down\'s or Turner\'s (use karyotype R297).',
     who: 'Clinical Genetics · Community Paediatrics · Neonatology · Neurology · Paediatrics',
     paeds: true,
   },
   {
     code: 'R29', name: 'Intellectual disability WGS',
-    desc: 'WGS panel for unexplained moderate/severe/profound ID or GDD where monogenic cause is suspected. Included within R27 — request R27 in preference unless standalone ID panel is specifically indicated.',
+    desc: 'WGS panel for unexplained moderate/severe/profound ID or GDD. Always request R27 in preference — labs automatically convert R29 to R27. Standalone R29 only if there are specific clinical reasons to limit the panel.',
     who: 'Clinical Genetics · Metabolic Medicine · Neurology · Paediatrics · Community Paediatrics',
     paeds: true,
   },
@@ -65,6 +65,12 @@ const RCODES: RCode[] = [
     code: 'R137', name: 'Congenital heart disease microarray',
     desc: 'SNP array — alternative to R28, used specifically where congenital heart disease is the primary feature.',
     who: 'Cardiology · Clinical Genetics · Paediatrics',
+    paeds: true,
+  },
+  {
+    code: 'R297', name: 'Karyotype — structural chromosomal abnormality',
+    desc: 'Primary test for suspected Down\'s syndrome (Trisomy 21) and Turner\'s syndrome (45,X). Also for suspected structural rearrangements. Not replaced by WGS or microarray for these indications.',
+    who: 'Clinical Genetics · Community Paediatrics · Neonatology · Paediatrics',
     paeds: true,
   },
 ]
@@ -147,12 +153,14 @@ export default function QuickRef() {
         <h3 className="font-semibold text-gray-800 mb-3">📋 Key rules</h3>
         <div className="space-y-2">
           {[
-            'WGS identifies CNVs and fragile X — no need for array CGH or FraX first (unless recognisable syndrome suspected)',
-            'Array CGH first if a recognisable chromosomal syndrome is suspected — faster results',
-            'Trio approach needed: proband + both parents sampled simultaneously',
-            'One WGS request form per trio; one ROD form per individual (3 total)',
-            'One genetic test request form per blood sample (3 samples = 3 forms)',
-            'Email WGS form + RODs to nuth.dna@nhs.net',
+            'R27 WGS is now the default first-line test for most paediatric indications (June 2025) — no separate microarray needed first',
+            'WGS detects CNVs — microarray (R28) only if strong specific chromosomal suspicion (Williams, 22q11, Cri du Chat) for faster results',
+            'R53 Fragile X standalone test was removed from NHS test directory April 2025 — WGS detects it',
+            'Down\'s or Turner\'s suspected → karyotype (R297) is the primary test, not R28 or WGS',
+            'Always request R27 rather than R29 — labs auto-convert R29 to R27 anyway',
+            'Trio approach: proband + both parents sampled simultaneously',
+            'One WGS request form per trio; one RoD form per individual (3 total)',
+            'Email WGS form + RoDs to nuth.dna@nhs.net (Newcastle)',
             'Do not share uncertain/unexpected results with patients without genetics input',
           ].map((rule, i) => (
             <div key={i} className="flex items-start gap-2">

@@ -42,7 +42,7 @@ const SYNDROME_INFO: Record<string, SyndromeInfo> = {
       "Intellectual disability (mild–moderate)",
     ],
     genetics: "Trisomy 21 in 95% of cases. Translocation (4%) or mosaic (1%) forms also occur.",
-    test: "Chromosomal microarray (R28/R137) — karyotype if translocation suspected",
+    test: "Karyotype (R297) is the primary diagnostic test. Microarray (R28) if translocation or mosaic form suspected. WGS (R27) is not the first-line test for Down's — diagnosis is usually clinical or antenatal.",
     link: { label: "DS health surveillance pathway", url: "https://dspathway.app" },
   },
   "Turner's syndrome": {
@@ -56,7 +56,7 @@ const SYNDROME_INFO: Record<string, SyndromeInfo> = {
       "Bicuspid aortic valve, coarctation",
     ],
     genetics: "45,X in 50%; mosaic forms (45,X/46,XX) or structural X abnormalities in remainder.",
-    test: "Karyotype (detects monosomy X); microarray for structural X variants",
+    test: "Karyotype (R297) — the primary test for suspected Turner's. Microarray for structural X chromosome variants. Not a primary R28 indication — refer to Clinical Genetics or Endocrinology.",
   },
   "Williams syndrome": {
     name: "Williams syndrome (7q11.23 deletion)",
@@ -416,7 +416,7 @@ export default function TestSelector() {
           <p className="text-base font-semibold text-gray-700 mb-1">
             Does the clinical picture suggest a <strong>recognisable chromosomal condition</strong>?
           </p>
-          <p className="text-xs text-gray-400 mb-3">Tick any that apply — tap the ⓘ for key features</p>
+          <p className="text-xs text-gray-400 mb-3">Tick any that apply — tap the ⓘ for key features. Note: Down's and Turner's have specific karyotype pathways (R297) — R28 is not primary for these.</p>
           <div className="space-y-2 mb-4">
             {RECOGNISABLE.map(r => (
               <div key={r} className="flex items-center gap-2">
@@ -494,13 +494,14 @@ export default function TestSelector() {
       {/* Results */}
       {step === 'result_array' && (
         <ResultBox
-          title="Array CGH (SNP array) — Paeds-led"
+          title="Chromosomal microarray (SNP array) — Paeds-led"
           code="R28 / R137"
-          rationale={`Array CGH should be performed first when a recognisable chromosomal syndrome is suspected${recognisableSelected.length > 0 ? ` (${recognisableSelected.join(', ')})` : ''} — it provides faster results than WGS. Request R27 trio WGS if array CGH result is normal.`}
+          rationale={`Microarray is appropriate when there is strong clinical suspicion of a specific chromosomal cause${recognisableSelected.length > 0 ? ` (${recognisableSelected.join(', ')})` : ''} — it gives faster results for chromosomal deletions/duplications. Note: as of June 2025, WGS (R27) is now the default first-line test for most paediatric indications. Microarray is retained where chromosomal suspicion is high and speed matters. If Down's or Turner's is suspected, karyotype (R297) is the primary test — refer to Clinical Genetics. WGS detects CNVs and no longer requires separate microarray or fragile X testing.`}
           actions={[
-            'Request R28 or R137 (SNP array)',
-            'If normal → request R27 WGS trio',
-            'Note: WGS will identify CNVs and fragile X — no need to request array CGH or FraX separately if going straight to WGS',
+            'Request R28 or R137 (SNP array) if strong chromosomal suspicion',
+            'If Down\'s or Turner\'s suspected → karyotype (R297), refer to Clinical Genetics',
+            'If microarray normal or chromosomal suspicion lower → request R27 WGS trio',
+            'WGS (R27) is now first-line for most paediatric indications as of June 2025',
           ]}
           urgent={urgentFlag}
         />
@@ -510,7 +511,7 @@ export default function TestSelector() {
         <ResultBox
           title="WGS trio — Paeds-led"
           code="R27 (inc. R59)"
-          rationale="Patient has developmental delay with seizures only and no other syndromic features. R27 includes R59 (epilepsy panel). Covers 2,892+ genes across 13 sub-panels. Trio approach maximises diagnostic yield."
+          rationale="Patient has developmental delay with seizures only and no other syndromic features. R27 includes the R59 epilepsy panel across 13 sub-panels. WGS detects CNVs — no separate microarray needed. Trio approach maximises diagnostic yield."
           actions={[
             'Request R27 (includes R59)',
             'Arrange trio — proband + both parents',
@@ -554,7 +555,7 @@ export default function TestSelector() {
         <ResultBox
           title="WGS trio — Paeds-led"
           code="R27"
-          rationale="No additional syndromic features. Paeds-led R27 is appropriate. R27 is a super panel covering 2,892+ genes across 13 sub-panels including ID (R29), inborn errors of metabolism (R98), skeletal dysplasia (R104) and more. Suitable for most paediatric patients with a possible syndromic genetic diagnosis. Note: R98 and R104 are included within R27 but cannot be requested as standalone tests by community paediatricians — those require Metabolic Medicine or Clinical Genetics."
+          rationale="No additional syndromic features. Paeds-led R27 is appropriate and is now the default first-line WGS test for most paediatric patients (as of June 2025). R27 is a super panel covering 13 sub-panels including ID (R29), early onset epilepsy (R59), inborn errors of metabolism (R98), skeletal dysplasia (R104) and more. WGS detects CNVs — no separate microarray needed. Note: R98, R104, and R59 are covered within R27 but cannot be requested as standalone tests by community paediatricians — those require Metabolic Medicine, Neurology, or Clinical Genetics."
           actions={[
             'Request R27 paeds-led trio',
             'Arrange trio — proband + both parents',
