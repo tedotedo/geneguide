@@ -171,10 +171,39 @@ export default function QuickRef() {
         </div>
       </div>
 
+      {/* Symbol key */}
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 space-y-2">
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Key</p>
+        <div className="flex items-start gap-2">
+          <span className="text-base shrink-0">✅</span>
+          <p className="text-xs text-gray-600">Can be requested directly by community paediatricians</p>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="text-base shrink-0">⚠️</span>
+          <p className="text-xs text-gray-600 font-medium">Refer</p>
+          <p className="text-xs text-gray-600">— specialist referral required, community paediatricians should not request directly</p>
+        </div>
+      </div>
+
       {/* Attribution */}
-      <p className="text-xs text-gray-400 text-center">
-        Based on North Tees community paediatrics genetic testing pathway (April 2026) and Northern Genetics Service trio WGS guidance (March 2026).
-      </p>
+      <div className="bg-stone-50 rounded-2xl border border-gray-100 p-4">
+        <p className="text-xs text-gray-500 font-semibold mb-1">📋 Data sources</p>
+        <p className="text-xs text-gray-400 leading-relaxed">
+          Requesting clinician eligibility based on <span className="font-medium">NHS GMS National Genomic Test Directory v8.1</span> (July 2025) and <span className="font-medium">NEY GLH guidance</span> (June 2025). R-code descriptions based on North Tees community paediatrics pathway (April 2026).
+        </p>
+        <p className="text-xs text-amber-600 mt-2 leading-relaxed">
+          ⚠️ Test eligibility and requesting clinician criteria may change. Always verify against the current{' '}
+          <a
+            href="https://www.england.nhs.uk/publication/national-genomic-test-directories/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            NHS Test Directory
+          </a>
+          {' '}before requesting.
+        </p>
+      </div>
     </div>
   )
 }

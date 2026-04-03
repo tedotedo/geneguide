@@ -184,6 +184,33 @@ export default function ArrangeTrio() {
         <p className="text-base text-gray-500">Step-by-step checklist — NEY Genomic Laboratory Hub</p>
       </div>
 
+      {/* Symbol key */}
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 space-y-2">
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Key</p>
+        <div className="flex items-start gap-2">
+          <span className="text-base shrink-0">✅</span>
+          <p className="text-xs text-gray-600">Can be requested directly by community paediatricians</p>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="text-base shrink-0">⚠️</span>
+          <p className="text-xs text-gray-600">Specialist referral required — community paediatricians should refer rather than request directly</p>
+        </div>
+        <div className="mt-2 pt-2 border-t border-gray-100">
+          <p className="text-xs text-gray-400 leading-relaxed">
+            Based on NHS Genomic Medicine Service National Test Directory v8.1 (July 2025) and NEY Genomic Laboratory Hub guidance (last updated June 2025). Requesting clinician eligibility may change — always verify against the current{' '}
+            <a
+              href="https://www.england.nhs.uk/publication/national-genomic-test-directories/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              NHS Test Directory
+            </a>
+            {' '}before requesting.
+          </p>
+        </div>
+      </div>
+
       {/* Progress */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4">
         <div className="flex justify-between text-sm mb-2">

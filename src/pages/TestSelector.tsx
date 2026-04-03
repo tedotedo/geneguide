@@ -578,9 +578,13 @@ export default function TestSelector() {
       {/* Quick turnaround singles — always shown once past start */}
       {step !== 'start' && step !== 'out_of_scope' && (
         <Card>
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
             Also consider at any stage — quick turnaround single gene tests
           </p>
+          <div className="flex gap-3 mb-3">
+            <span className="text-xs text-gray-400 flex items-center gap-1">✅ Community paeds</span>
+            <span className="text-xs text-gray-400 flex items-center gap-1">⚠️ Refer to specialist</span>
+          </div>
           <div className="space-y-2">
             {QUICK_SINGLES.map(q => (
               <div key={q.code} className="flex flex-col gap-1">
