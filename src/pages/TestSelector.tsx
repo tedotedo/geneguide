@@ -370,7 +370,7 @@ export default function TestSelector() {
 
       <div>
         <h2 className="text-xl font-bold text-gray-800">Test Selector</h2>
-        <p className="text-base text-gray-500">North Tees community paediatrics genetic testing pathway — April 2026</p>
+        <p className="text-base text-gray-500">University Hospitals Tees community paediatrics genetic testing pathway — April 2026</p>
       </div>
 
       {/* Urgent flags — always visible */}

@@ -11,7 +11,7 @@ export default function Welcome() {
           <span className="text-2xl">🧬</span>
           <div>
             <h1 className="font-bold text-lg leading-tight">GeneGuide</h1>
-            <p className="text-blue-200 text-sm">Paediatric Genetic Testing — North Tees</p>
+            <p className="text-blue-200 text-sm">Paediatric Genetic Testing — University Hospitals Tees</p>
           </div>
         </div>
       </header>
@@ -37,14 +37,14 @@ export default function Welcome() {
           </p>
           <p className="text-gray-600 text-sm leading-relaxed mb-4">
             GeneGuide is a clinical decision-support tool designed to help community paediatricians
-            navigate the genetic testing pathway for children in North Tees. It provides
+            navigate the genetic testing pathway for children seen across University Hospitals Tees NHS Foundation Trust sites. It provides
             structured guidance on when and how to request genetic investigations, with a focus
-            on Trio Whole Exome Sequencing (Trio WES) for children with intellectual disability,
+            on Trio Whole Genome Sequencing (Trio WGS) for children with intellectual disability,
             global developmental delay, and related presentations.
           </p>
           <p className="text-gray-600 text-sm leading-relaxed">
             The tool covers the full pathway — from deciding whether genetic testing is appropriate,
-            through understanding why Trio WES is preferred over single-sample testing, to
+            through understanding why Trio WGS is preferred over single-sample testing, to
             arranging the referral and interpreting results when they return.
           </p>
         </div>
@@ -55,9 +55,9 @@ export default function Welcome() {
           <div className="flex flex-col gap-3">
             {[
               { icon: '🧬', title: 'Test Selector', desc: 'Step-by-step guidance on whether genetic testing is indicated and which test to request' },
-              { icon: '❓', title: 'Why Trio?', desc: 'Evidence-based explanation of why Trio WES outperforms single-sample exome and microarray in this setting' },
+              { icon: '❓', title: 'Why Trio?', desc: 'Evidence-based explanation of why Trio WGS outperforms single-sample exome and microarray in this setting' },
               { icon: '📋', title: 'Arrange Trio', desc: 'Practical instructions for making the referral, including what information and consent is needed' },
-              { icon: '📊', title: 'Results', desc: 'How to interpret and act on Trio WES results, including variants of uncertain significance' },
+              { icon: '📊', title: 'Results', desc: 'How to interpret and act on Trio WGS results, including variants of uncertain significance' },
               { icon: '📖', title: 'Quick Reference', desc: 'At-a-glance summary of key criteria, contacts, and resources' },
             ].map(item => (
               <div key={item.title} className="flex items-start gap-3">
@@ -80,7 +80,7 @@ export default function Welcome() {
         </button>
 
         <p className="text-center text-gray-400 text-xs pb-4">
-          Developed for North Tees Community Paediatrics · University Hospitals Tees NHS Foundation Trust
+          Developed for community paediatricians at University Hospitals Tees NHS Foundation Trust
         </p>
       </main>
     </div>

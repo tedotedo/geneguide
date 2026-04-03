@@ -189,7 +189,7 @@ export default function QuickRef() {
       <div className="bg-stone-50 rounded-2xl border border-gray-100 p-4">
         <p className="text-xs text-gray-500 font-semibold mb-1">📋 Data sources</p>
         <p className="text-xs text-gray-400 leading-relaxed">
-          Requesting clinician eligibility based on <span className="font-medium">NHS GMS National Genomic Test Directory v8.1</span> (July 2025) and <span className="font-medium">NEY GLH guidance</span> (June 2025). R-code descriptions based on North Tees community paediatrics pathway (April 2026).
+          Requesting clinician eligibility based on <span className="font-medium">NHS GMS National Genomic Test Directory v8.1</span> (July 2025) and <span className="font-medium">NEY GLH guidance</span> (June 2025). R-code descriptions based on University Hospitals Tees community paediatrics pathway (April 2026).
         </p>
         <p className="text-xs text-amber-600 mt-2 leading-relaxed">
           ⚠️ Test eligibility and requesting clinician criteria may change. Always verify against the current{' '}

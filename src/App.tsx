@@ -61,7 +61,7 @@ function AppShell() {
             <span className="text-2xl">🧬</span>
             <div>
               <h1 className="font-bold text-lg leading-tight">GeneGuide</h1>
-              <p className="text-blue-200 text-sm">Paediatric Genetic Testing — North Tees</p>
+              <p className="text-blue-200 text-sm">Paediatric Genetic Testing — University Hospitals Tees</p>
             </div>
           </div>
         </header>
