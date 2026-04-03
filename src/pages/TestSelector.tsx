@@ -22,14 +22,92 @@ const BOX_A = [
   'Skin findings suggestive of genetic disorder (e.g. neurofibromatosis, tuberous sclerosis)',
 ]
 
-const RECOGNISABLE = [
-  "Down's syndrome",
-  "Turner's syndrome",
-  "Williams syndrome",
-  "22q11 deletion",
-  "Cri du Chat",
-  "Other recognisable syndrome",
-]
+type SyndromeInfo = {
+  name: string
+  features: string[]
+  genetics: string
+  test: string
+}
+
+const SYNDROME_INFO: Record<string, SyndromeInfo> = {
+  "Down's syndrome": {
+    name: "Down's syndrome (Trisomy 21)",
+    features: [
+      "Upslanting palpebral fissures, epicanthic folds",
+      "Flat facial profile, small ears",
+      "Single palmar crease",
+      "Hypotonia, joint laxity",
+      "Short stature",
+      "Intellectual disability (mild–moderate)",
+    ],
+    genetics: "Trisomy 21 in 95% of cases. Translocation (4%) or mosaic (1%) forms also occur.",
+    test: "Chromosomal microarray (R28/R137) — karyotype if translocation suspected",
+  },
+  "Turner's syndrome": {
+    name: "Turner syndrome (45,X)",
+    features: [
+      "Short stature (most consistent feature)",
+      "Webbed neck, low posterior hairline",
+      "Widely spaced nipples, shield chest",
+      "Lymphoedema of hands/feet at birth",
+      "Ovarian dysgenesis → primary amenorrhoea",
+      "Bicuspid aortic valve, coarctation",
+    ],
+    genetics: "45,X in 50%; mosaic forms (45,X/46,XX) or structural X abnormalities in remainder.",
+    test: "Karyotype (detects monosomy X); microarray for structural X variants",
+  },
+  "Williams syndrome": {
+    name: "Williams syndrome (7q11.23 deletion)",
+    features: [
+      "Elfin facies — periorbital fullness, stellate iris",
+      "Friendly, loquacious personality",
+      "Intellectual disability with relative language strength",
+      "Hypercalcaemia in infancy",
+      "Supravalvular aortic stenosis (SVAS)",
+      "Hypersensitivity to sound",
+    ],
+    genetics: "~1.5 Mb deletion at 7q11.23 including ELN gene. De novo in most cases.",
+    test: "Chromosomal microarray (R28/R137) — detects 7q11.23 deletion reliably",
+  },
+  "22q11 deletion": {
+    name: "22q11.2 Deletion syndrome (DiGeorge / velocardiofacial)",
+    features: [
+      "Congenital heart defects (conotruncal — TOF, IAA, VSD)",
+      "Palatal abnormalities — cleft, VPI, submucous cleft",
+      "Immune deficiency (T-cell, thymic hypoplasia)",
+      "Hypocalcaemia (hypoparathyroidism)",
+      "Characteristic facies — tubular nose, small ears",
+      "Learning difficulties, psychiatric risk (schizophrenia ~25%)",
+    ],
+    genetics: "~3 Mb deletion at 22q11.2, includes TBX1. Usually de novo; AD inheritance.",
+    test: "Chromosomal microarray (R28/R137) — FISH no longer first-line",
+  },
+  "Cri du Chat": {
+    name: "Cri du Chat syndrome (5p deletion)",
+    features: [
+      "High-pitched cat-like cry in infancy",
+      "Microcephaly",
+      "Wide-set eyes (hypertelorism), low-set ears",
+      "Low birth weight, feeding difficulties",
+      "Severe intellectual disability",
+      "Behavioural features — self-injurious behaviour",
+    ],
+    genetics: "Deletion of short arm of chromosome 5 (5p15.2-p15.3). Usually de novo; size correlates with severity.",
+    test: "Chromosomal microarray (R28/R137)",
+  },
+  "Other recognisable syndrome": {
+    name: "Other recognisable chromosomal syndrome",
+    features: [
+      "Clinical features suggest a specific chromosomal or contiguous gene deletion syndrome",
+      "May include: Angelman, Prader-Willi, Smith-Magenis, Wolf-Hirschhorn, Kabuki, Cornelia de Lange",
+      "Consider whether features fit a recognisable pattern",
+    ],
+    genetics: "Variable — depends on suspected syndrome. Many are caused by chromosomal deletions/duplications detectable by microarray.",
+    test: "Chromosomal microarray (R28/R137) as first-line. Discuss with Northern Genetics if uncertain.",
+  },
+}
+
+const RECOGNISABLE = Object.keys(SYNDROME_INFO)
 
 const QUICK_SINGLES = [
   { code: 'R70', name: 'Spinal muscular atrophy type 1' },
@@ -60,6 +138,51 @@ function Btn({ children, onClick, colour = 'blue' }: { children: React.ReactNode
     >
       {children}
     </button>
+  )
+}
+
+function SyndromeModal({ info, onClose }: { info: SyndromeInfo; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 px-2 pb-4" onClick={onClose}>
+      <div
+        className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[80vh] overflow-y-auto"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="sticky top-0 bg-blue-700 text-white px-5 py-4 rounded-t-2xl flex items-start justify-between">
+          <h3 className="font-bold text-base leading-snug pr-4">{info.name}</h3>
+          <button onClick={onClose} className="text-white/80 hover:text-white text-2xl leading-none mt-[-2px]">×</button>
+        </div>
+        <div className="px-5 py-4 space-y-4">
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Key clinical features</p>
+            <ul className="space-y-1">
+              {info.features.map((f, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                  <span className="text-blue-500 font-bold mt-0.5">•</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Genetics</p>
+            <p className="text-sm text-gray-700 leading-relaxed">{info.genetics}</p>
+          </div>
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
+            <p className="text-xs font-semibold text-blue-500 uppercase tracking-wide mb-1">Recommended test</p>
+            <p className="text-sm text-blue-800 font-medium">{info.test}</p>
+          </div>
+        </div>
+        <div className="px-5 pb-5">
+          <button
+            onClick={onClose}
+            className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-xl text-sm"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -110,6 +233,7 @@ export default function TestSelector() {
   const [pregnant, setPregnant] = useState(false)
   const [urgent, setUrgent] = useState(false)
   const [recognisableSelected, setRecognisableSelected] = useState<string[]>([])
+  const [activeModal, setActiveModal] = useState<string | null>(null)
 
   const reset = () => {
     setStep('start')
@@ -118,6 +242,7 @@ export default function TestSelector() {
     setPregnant(false)
     setUrgent(false)
     setRecognisableSelected([])
+    setActiveModal(null)
   }
 
   const toggleBoxA = (item: string) =>
@@ -134,6 +259,11 @@ export default function TestSelector() {
 
   return (
     <div className="space-y-4">
+      {/* Syndrome info modal */}
+      {activeModal && SYNDROME_INFO[activeModal] && (
+        <SyndromeModal info={SYNDROME_INFO[activeModal]} onClose={() => setActiveModal(null)} />
+      )}
+
       <div>
         <h2 className="text-xl font-bold text-gray-800">Test Selector</h2>
         <p className="text-base text-gray-500">North Tees community paediatrics genetic testing pathway — April 2026</p>
@@ -182,14 +312,25 @@ export default function TestSelector() {
           <p className="text-base font-semibold text-gray-700 mb-1">
             Does the clinical picture suggest a <strong>recognisable chromosomal condition</strong>?
           </p>
-          <p className="text-xs text-gray-400 mb-3">Tick any that apply</p>
+          <p className="text-xs text-gray-400 mb-3">Tick any that apply — tap the ⓘ for key features</p>
           <div className="space-y-2 mb-4">
             {RECOGNISABLE.map(r => (
-              <label key={r} className="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked={recognisableSelected.includes(r)}
-                  onChange={() => toggleRec(r)} className="w-4 h-4 accent-blue-700" />
-                <span className="text-base text-gray-700">{r}</span>
-              </label>
+              <div key={r} className="flex items-center gap-2">
+                <label className="flex items-center gap-3 cursor-pointer flex-1">
+                  <input type="checkbox" checked={recognisableSelected.includes(r)}
+                    onChange={() => toggleRec(r)} className="w-4 h-4 accent-blue-700 shrink-0" />
+                  <span className="text-base text-gray-700">{r}</span>
+                </label>
+                {SYNDROME_INFO[r] && r !== 'Other recognisable syndrome' && (
+                  <button
+                    onClick={() => setActiveModal(r)}
+                    className="shrink-0 w-7 h-7 rounded-full bg-blue-100 text-blue-700 text-sm font-bold hover:bg-blue-200 transition-colors flex items-center justify-center"
+                    aria-label={`Info about ${r}`}
+                  >
+                    ⓘ
+                  </button>
+                )}
+              </div>
             ))}
           </div>
           <div className="space-y-2">
